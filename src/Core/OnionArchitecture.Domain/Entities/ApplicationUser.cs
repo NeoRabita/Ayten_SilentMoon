@@ -1,8 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using OnionArchitecture.Domain.Common;
+using System.Collections.Generic;
 
 namespace OnionArchitecture.Domain.Entities
 {
-    public class ApplicationUser
+    public class ApplicationUser : BaseEntity
     {
         public ApplicationUser()
         {
