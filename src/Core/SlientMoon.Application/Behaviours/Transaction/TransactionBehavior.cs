@@ -2,6 +2,7 @@
 using SlientMoon.Application.Interfaces.Logging;
 using SlientMoon.Application.Interfaces.Messaging;
 using System;
+using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -19,7 +20,10 @@ namespace SlientMoon.Application.Behaviours.Transaction
             _logger = logger;
         }
 
-        public async Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken, Func<Task<TResponse>> next)
+        public async Task<TResponse> Handle(
+     TRequest request,
+     RequestHandlerDelegate<TResponse> next,
+     CancellationToken cancellationToken)
         {
             if (request is IBaseNonTransactionalCommand)
                 return await next();

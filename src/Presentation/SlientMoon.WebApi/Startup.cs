@@ -84,7 +84,7 @@ namespace SlientMoon.WebApi
 
             app.UseLocalization();
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
 
             app.UseRouting();
             app.UseErrorHandling();

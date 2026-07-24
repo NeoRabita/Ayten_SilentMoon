@@ -12,11 +12,21 @@ namespace SlientMoon.Infrastructure.Persistence.Contexts
 
         public DbSet<RefreshToken> RefreshTokens { get; set; }
         public DbSet<Topic> Topics { get; set; }
+        public DbSet<UserTopic> UserTopics { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<ApplicationUser>()
-                .HasMany(x => x.Topics)
-                .WithMany();
+            modelBuilder.Entity<UserTopic>()
+                .HasKey(x => new { x.UserId, x.TopicId });
+
+            modelBuilder.Entity<UserTopic>()
+                .HasOne(x => x.User)
+                .WithMany(x => x.UserTopics)
+                .HasForeignKey(x => x.UserId);
+
+            modelBuilder.Entity<UserTopic>()
+                .HasOne(x => x.Topic)
+                .WithMany(x => x.UserTopics)
+                .HasForeignKey(x => x.TopicId);
 
             modelBuilder.Entity<Topic>().HasData(
                 new Topic { Id = 1, Name = "Reduce Stress", ImageUrl = "stress.png" },
