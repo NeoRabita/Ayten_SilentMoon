@@ -6,7 +6,7 @@ using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace SlientMoon.Application.Interfaces.Messaging
+namespace OnionArchitecture.Application.Interfaces.Messaging
 {
     public class Dispatcher : IDispatcher
     {

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SlientMoon.Application.Interfaces.Messaging
+namespace OnionArchitecture.Application.Interfaces.Messaging
 {
     public class VoidResponse
     {

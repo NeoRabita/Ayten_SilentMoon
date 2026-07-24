@@ -1,12 +1,11 @@
 ﻿using Application.Abstractions.Messaging;
+using OnionArchitecture.Application.Interfaces.Messaging;
 using SlientMoon.Application.Interfaces.Logging;
-using SlientMoon.Application.Interfaces.Messaging;
 using System;
-using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace SlientMoon.Application.Behaviours.Transaction
+namespace OnionArchitecture.Application.Behaviours.Transaction
 {
     public class TransactionBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
      where TRequest : IBaseCommand
@@ -20,10 +19,7 @@ namespace SlientMoon.Application.Behaviours.Transaction
             _logger = logger;
         }
 
-        public async Task<TResponse> Handle(
-     TRequest request,
-     RequestHandlerDelegate<TResponse> next,
-     CancellationToken cancellationToken)
+        public async Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken, Func<Task<TResponse>> next)
         {
             if (request is IBaseNonTransactionalCommand)
                 return await next();

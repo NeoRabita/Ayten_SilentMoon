@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SlientMoon.Application.DTOs.Auth;
 using SlientMoon.Application.Features.Commands.ForgotPassword;
@@ -11,148 +12,65 @@ using SlientMoon.Application.Features.Commands.ResetPassword;
 using SlientMoon.Application.Features.Commands.VerifyEmail;
 using SlientMoon.Application.Interfaces.Services;
 using System.Threading.Tasks;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace SlientMoon.WebApi.Controllers
 {
     [Route("api/auth")]
     [ApiController]
-    public class AuthController : ControllerBase
+    public class AuthController : BaseController
     {
-        private readonly IMediator _mediator;
-
-        public AuthController(IMediator mediator)
-        {
-            _mediator = mediator;
-        }
 
         [HttpPost("register")]
-        public async Task<IActionResult> Register(RegisterRequest request)
+        public async Task<IResult> Register([FromBody] RegisterCommand command)
         {
-            var command = new RegisterCommand(
-                request.Name,
-                request.Email,
-                request.Password);
+            var result = await Dispatcher.Send(command);
+            return HandleResult(result);
 
-            var result = await _mediator.Send(command);
-
-            if (result.IsFailure)
-            {
-                return BadRequest(result.Error);
-            }
-
-            return StatusCode(201, result.Value);
         }
+
         [HttpPost("verify-email")]
-        public async Task<IActionResult> VerifyEmail(VerifyEmailRequest request)
+        public async Task<IResult> VerifyEmail([FromBody] VerifyEmailCommand  command)
         {
-            var command = new VerifyEmailCommand(
-                request.Email,
-                request.Otp);
-
-            var result = await _mediator.Send(command);
-
-            if (result.IsFailure)
-            {
-                return BadRequest(result.Error);
-            }
-
-            return Ok(new
-            {
-                Message = "Email uğurla təsdiqləndi."
-            });
+            var result = await Dispatcher.Send(command);
+            return HandleResult(result);
         }
         [HttpPost("resend-otp")]
-        public async Task<IActionResult> ResendOtp(ResendOtpRequest request)
+        public async Task<IResult> ResendOtp([FromBody] ResendOtpCommand command)
         {
-            var command = new ResendOtpCommand(request.Email);
-
-            var result = await _mediator.Send(command);
-
-            if (result.IsFailure)
-            {
-                return BadRequest(result.Error);
-            }
-
-            return Ok(new
-            {
-                Message = "OTP kodu yenidən göndərildi."
-            });
+            var result = await Dispatcher.Send(command);
+            return HandleResult(result);
         }
         [HttpPost("login")]
-        public async Task<IActionResult> Login(LoginRequest request)
+        public async Task<IResult> Login([FromBody] LoginCommand command)
         {
-            var command = new LoginCommand(
-                request.Email,
-                request.Password);
-
-            var result = await _mediator.Send(command);
-
-            if (result.IsFailure)
-            {
-                return BadRequest(result.Error);
-            }
-
-            return Ok(result.Value);
+            var result = await Dispatcher.Send(command);
+            return HandleResult(result);
         }
         [HttpPost("refresh-token")]
-        public async Task<IActionResult> RefreshToken(RefreshTokenRequest request)
+        public async Task<IResult> RefreshToken([FromBody] RefreshTokenCommand command)
         {
-            var command = new RefreshTokenCommand(request.RefreshToken);
-
-            var result = await _mediator.Send(command);
-
-            if (result.IsFailure)
-            {
-                return BadRequest(result.Error);
-            }
-
-            return Ok(result.Value);
+            var result = await Dispatcher.Send(command);
+            return HandleResult(result);
         }
         [HttpPost("oauth/google")]
-        public async Task<IActionResult> GoogleLogin([FromBody] GoogleLoginRequest request)
+        public async Task<IResult> GoogleLogin([FromBody] GoogleLoginCommand command)
         {
-            var command = new GoogleLoginCommand(request.IdToken);
-
-            var result = await _mediator.Send(command);
-
-            if (result.IsFailure)
-            {
-                return BadRequest(result.Error);
-            }
-
-            return Ok(result.Value);
+            var result = await Dispatcher.Send(command);
+            return HandleResult(result);
         }
         [HttpPost("forgot-password")]
-        public async Task<IActionResult> ForgotPassword(ForgotPasswordRequest request)
+        public async Task<IResult> ForgotPassword(ForgotPasswordCommand command)
         {
-            var command = new ForgotPasswordCommand(request.Email);
-
-            var result = await _mediator.Send(command);
-
-            if (result.IsFailure)
-            {
-                return BadRequest(result.Error);
-            }
-
-            return Ok();
+            var result = await Dispatcher.Send(command);
+            return HandleResult(result);
         }
 
         [HttpPost("reset-password")]
-        public async Task<IActionResult> ResetPassword(ResetPasswordRequest request)
+        public async Task<IResult> ResetPassword(ResetPasswordCommand command)
         {
-            var command = new ResetPasswordCommand(
-                request.Email,
-                request.Code,
-                request.Password);
-
-            var result = await _mediator.Send(command);
-
-            if (result.IsFailure)
-            {
-                return BadRequest(result.Error);
-            }
-
-            return Ok();
+            var result = await Dispatcher.Send(command);
+            return HandleResult(result);
         }
     }
 }

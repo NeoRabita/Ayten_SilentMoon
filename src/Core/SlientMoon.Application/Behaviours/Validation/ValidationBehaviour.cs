@@ -1,14 +1,14 @@
-﻿using System;
+﻿using FluentValidation;
+using FluentValidation.Results;
+using OnionArchitecture.Application.Interfaces.Messaging;
+using SlientMoon.SharedKernel.Primitives;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using FluentValidation;
-using FluentValidation.Results;
-using SlientMoon.Application.Interfaces.Messaging;
-using SlientMoon.SharedKernel.Primitives;
 
-namespace SlientMoon.Application.Behaviours.Validation
+namespace OnionArchitecture.Application.Behaviours.Validation
 {
     public class ValidationBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
     {

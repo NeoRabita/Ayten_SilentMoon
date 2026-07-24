@@ -1,4 +1,4 @@
-﻿using MediatR;
+﻿
 using SlientMoon.Application.DTOs.Profile;
 using SlientMoon.Application.Features.Profile.Commands.UpdateProfile;
 using Microsoft.AspNetCore.Authorization;
@@ -13,25 +13,15 @@ namespace SlientMoon.WebApi.Controllers;
 [Authorize]
 [ApiController]
 [Route("api/me")]
-public class ProfileController : ControllerBase
+public class ProfileController : BaseController
 {
-    private readonly IMediator _mediator;
-
-    public ProfileController(IMediator mediator)
-    {
-        _mediator = mediator;
-    }
-
     [HttpGet]
     public async Task<IActionResult> GetProfile()
     {
         var userId = int.Parse(
             User.FindFirstValue(ClaimTypes.NameIdentifier)!);
 
-        var result = await _mediator.Send(new GetProfileQuery(userId));
-
-        if (result.IsFailure)
-            return BadRequest(result.Error);
+        var result = await Dispatcher.Send(new GetProfileQuery(userId));
 
         return Ok(result.Value);
     }
@@ -46,7 +36,7 @@ public class ProfileController : ControllerBase
             request.Name,
             request.AvatarUrl);
 
-        var result = await _mediator.Send(command);
+        var result = await Dispatcher.Send(command);
 
         if (result.IsFailure)
         {

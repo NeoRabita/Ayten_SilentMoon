@@ -1,22 +1,10 @@
-﻿using MediatR;
-
-namespace Application.Abstractions.Messaging;
+﻿namespace Application.Abstractions.Messaging;
 
 public interface IBaseCommand { }
 public interface IBaseNonTransactionalCommand : IBaseCommand { }
 
-public interface ICommand<TResponse> : IRequest<Result<TResponse>>, IBaseCommand
-{
-}
+public interface ICommand<out TResponse> : IBaseCommand { }
+public interface ICommand : ICommand<Result> { }
 
-public interface ICommand : IRequest<Result>, IBaseCommand
-{
-}
-
-public interface INonTransactionalCommand<TResponse> : IRequest<Result<TResponse>>, IBaseNonTransactionalCommand
-{
-}
-
-public interface INonTransactionalCommand : IRequest<Result>, IBaseNonTransactionalCommand
-{
-}
+public interface INonTransactionalCommand<out TResponse> : IBaseNonTransactionalCommand { }
+public interface INonTransactionalCommand : INonTransactionalCommand<Result> { }

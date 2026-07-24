@@ -23,11 +23,6 @@ namespace SlientMoon.Infrastructure.Persistence.Contexts
                 .WithMany(x => x.UserTopics)
                 .HasForeignKey(x => x.UserId);
 
-            modelBuilder.Entity<UserTopic>()
-                .HasOne(x => x.Topic)
-                .WithMany(x => x.UserTopics)
-                .HasForeignKey(x => x.TopicId);
-
             modelBuilder.Entity<Topic>().HasData(
                 new Topic { Id = 1, Name = "Reduce Stress", ImageUrl = "stress.png" },
                 new Topic { Id = 2, Name = "Improve Performance", ImageUrl = "performance.png" },

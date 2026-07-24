@@ -1,15 +1,15 @@
-﻿using MediatR;
+﻿using System.Threading;
+using System.Threading.Tasks;
 
 namespace Application.Abstractions.Messaging;
-
 public interface ICommandHandler<in TCommand>
-    : IRequestHandler<TCommand, Result>
-    where TCommand : ICommand
+    where TCommand : IBaseCommand
 {
+    Task<Result> Handle(TCommand command, CancellationToken ct);
 }
 
 public interface ICommandHandler<in TCommand, TResponse>
-    : IRequestHandler<TCommand, Result<TResponse>>
-    where TCommand : ICommand<TResponse>
+    where TCommand : IBaseCommand
 {
+    Task<Result<TResponse>> Handle(TCommand command, CancellationToken ct);
 }

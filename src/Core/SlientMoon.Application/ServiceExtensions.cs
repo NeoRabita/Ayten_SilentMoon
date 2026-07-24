@@ -1,7 +1,7 @@
 using System.Reflection;
 using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
-using SlientMoon.Application.Interfaces.Messaging;
+using OnionArchitecture.Application.Interfaces.Messaging;
 
 namespace SlientMoon.Application
 {
