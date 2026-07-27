@@ -1,6 +1,8 @@
+using Application.Abstractions.Messaging;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
+using SlientMoon.Application.Interfaces.Messaging;
 using SlientMoon.WebApi.Services;
 
 namespace SlientMoon.WebApi.Controllers

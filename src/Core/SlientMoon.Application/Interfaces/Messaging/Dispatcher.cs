@@ -6,7 +6,7 @@ using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace OnionArchitecture.Application.Interfaces.Messaging
+namespace SlientMoon.Application.Interfaces.Messaging
 {
     public class Dispatcher : IDispatcher
     {
@@ -17,9 +17,7 @@ namespace OnionArchitecture.Application.Interfaces.Messaging
             _provider = provider;
         }
 
-        // ============================
-        //  COMMAND (NO RESULT)
-        // ============================
+       
         public async Task<Result> Send(IBaseCommand command, CancellationToken ct = default)
         {
             var commandType = command.GetType();
@@ -39,9 +37,7 @@ namespace OnionArchitecture.Application.Interfaces.Messaging
             return await pipelineChain();
         }
 
-        // ============================
-        //  QUERY (RESULT<T>)
-        // ============================
+      
         public async Task<Result<TResult>> Send<TResult>(IQuery<TResult> query, CancellationToken ct = default)
         {
             var queryType = query.GetType();
@@ -61,9 +57,6 @@ namespace OnionArchitecture.Application.Interfaces.Messaging
             return await pipelineChain();
         }
 
-        // ============================
-        //  COMMAND<TResult> (Transactional & Non-Transactional)
-        // ============================
 
         public Task<Result<TResult>> Send<TResult>(ICommand<TResult> command, CancellationToken ct = default)
             => ExecuteInternal<TResult>(command, ct);
@@ -91,9 +84,7 @@ namespace OnionArchitecture.Application.Interfaces.Messaging
         }
     }
 
-    // ============================
-    //  DEPENDENCY INJECTION
-    // ============================
+    
     public static class ServiceCollectionExtensions
     {
         public static void AddCqrsHandlers(this IServiceCollection services, Assembly assembly)

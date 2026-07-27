@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace OnionArchitecture.Application.Interfaces.Messaging
+namespace SlientMoon.Application.Interfaces.Messaging
 {
     public interface IPipelineBehavior<TRequest, TResponse>
     {

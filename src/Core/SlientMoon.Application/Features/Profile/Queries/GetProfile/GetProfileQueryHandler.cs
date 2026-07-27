@@ -1,6 +1,7 @@
 ﻿using Application.Abstractions.Messaging;
 using SlientMoon.Application.DTOs.Profile;
 using SlientMoon.Application.Interfaces.Repositories;
+using SlientMoon.Application.Interfaces.Services;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -9,18 +10,18 @@ namespace SlientMoon.Application.Features.Profile.Queries.GetProfile;
 public sealed class GetProfileQueryHandler
     : ICommandHandler<GetProfileQuery, UserProfileResponse>
 {
-    private readonly IUserRepository _userRepository;
+    private readonly IUserService _userService;
 
-    public GetProfileQueryHandler(IUserRepository userRepository)
+    public GetProfileQueryHandler(IUserService userService)
     {
-        _userRepository = userRepository;
+        _userService = userService;
     }
 
     public async Task<Result<UserProfileResponse>> Handle(
         GetProfileQuery request,
         CancellationToken ct)
     {
-        var user = await _userRepository.GetByIdAsync(request.UserId);
+        var user = await _userService.GetByIdAsync(request.UserId);
 
         if (user == null)
         {

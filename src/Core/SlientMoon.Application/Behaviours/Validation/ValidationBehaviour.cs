@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 using FluentValidation.Results;
-using OnionArchitecture.Application.Interfaces.Messaging;
+using SlientMoon.Application.Interfaces.Messaging;
 using SlientMoon.SharedKernel.Primitives;
 using System;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace OnionArchitecture.Application.Behaviours.Validation
+namespace SlientMoon.Application.Interfaces.Messaging
 {
     public class ValidationBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
     {
