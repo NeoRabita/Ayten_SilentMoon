@@ -13,7 +13,7 @@ using System.Configuration;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
-using SlientMoon.Infrastructure.Persistence.Settings;
+
 
 namespace SlientMoon.WebApi
 {

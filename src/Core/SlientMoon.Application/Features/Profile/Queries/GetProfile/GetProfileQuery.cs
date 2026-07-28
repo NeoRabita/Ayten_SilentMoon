@@ -4,6 +4,4 @@ using System;
 
 namespace SlientMoon.Application.Features.Profile.Queries.GetProfile;
 
-public sealed record GetProfileQuery(
-   int UserId
-) : ICommand<UserProfileResponse>;
+public sealed record GetProfileQuery() : ICommand<UserProfileResponse>;

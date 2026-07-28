@@ -1,6 +1,7 @@
 ﻿using Application.Abstractions.Messaging;
 using SlientMoon.Application.Interfaces.Repositories;
 using System.Threading;
+using Application;
 using System.Threading.Tasks;
 
 namespace SlientMoon.Application.Features.Profile.Commands.UpdateProfile;

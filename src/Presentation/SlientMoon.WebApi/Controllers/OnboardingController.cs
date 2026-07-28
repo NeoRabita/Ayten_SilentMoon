@@ -6,8 +6,7 @@ using System.Threading.Tasks;
 
 namespace SlientMoon.WebApi.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
+    
     public class OnboardingController : BaseController
     {
         [HttpGet("topics")]

@@ -21,7 +21,7 @@ public sealed class GetProfileQueryHandler
         GetProfileQuery request,
         CancellationToken ct)
     {
-        var user = await _userService.GetByIdAsync(request.UserId);
+        var user = await _userService.GetCurrentUserAsync();
 
         if (user == null)
         {

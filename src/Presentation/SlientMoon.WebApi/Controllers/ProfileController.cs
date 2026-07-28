@@ -18,10 +18,8 @@ public class ProfileController : BaseController
     [HttpGet]
     public async Task<IActionResult> GetProfile()
     {
-        var userId = int.Parse(
-            User.FindFirstValue(ClaimTypes.NameIdentifier)!);
-
-        var result = await Dispatcher.Send(new GetProfileQuery(userId));
+        
+        var result = await Dispatcher.Send(new GetProfileQuery());
 
         return Ok(result.Value);
     }

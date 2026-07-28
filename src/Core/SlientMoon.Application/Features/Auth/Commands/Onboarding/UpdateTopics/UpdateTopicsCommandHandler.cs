@@ -1,10 +1,9 @@
 ﻿using Application.Abstractions.Messaging;
-using global::SlientMoon.Application.Features.Auth.Commands.Onboarding.UpdateTopics;
 using global::SlientMoon.Application.Interfaces.Services;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace SlientMoon.Application.Features.Onboarding.Commands.UpdateTopics;
+namespace SlientMoon.Application.Features.Auth.Commands.Onboarding.UpdateTopics;
 
 public sealed class UpdateTopicsCommandHandler
     : ICommandHandler<UpdateTopicsCommand>

@@ -1,9 +1,10 @@
 ﻿using Application.Abstractions.Messaging;
 using System.Collections.Generic;
 
-namespace SlientMoon.Application.Features.Auth.Commands.Onboarding.UpdateTopics;
+namespace SlientMoon.Application.Features.Profile.Commands.UpdateProfile;
 
-public sealed record UpdateTopicsCommand(
+public sealed record UpdateProfileCommand(
     int UserId,
-    List<int> TopicIds
-) : ICommand; 
+    string Name,
+    string AvatarUrl
+) : ICommand;
