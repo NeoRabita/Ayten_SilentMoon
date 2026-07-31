@@ -2,7 +2,6 @@
 using SlientMoon.Application.DTOs.Topic;
 using System.Collections.Generic;
 
-namespace SlientMoon.Application.Features.Profile.Queries.GetUserTopics;
-
+namespace SlientMoon.Application.Features.Queries.Topics.GetUserTopics;
 public sealed record GetUserTopicsQuery()
-    : ICommand<List<TopicResponse>>;
+    : IQuery<List<TopicResponse>>;

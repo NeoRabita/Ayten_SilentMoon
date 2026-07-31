@@ -13,6 +13,7 @@ namespace SlientMoon.Infrastructure.Persistence.Contexts
         public DbSet<RefreshToken> RefreshTokens { get; set; }
         public DbSet<Topic> Topics { get; set; }
         public DbSet<UserTopic> UserTopics { get; set; }
+        public DbSet<Reminder> Reminders { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<UserTopic>()
@@ -21,6 +22,10 @@ namespace SlientMoon.Infrastructure.Persistence.Contexts
             modelBuilder.Entity<UserTopic>()
                 .HasOne(x => x.User)
                 .WithMany(x => x.UserTopics)
+                .HasForeignKey(x => x.UserId);
+            modelBuilder.Entity<Reminder>()
+                .HasOne(x => x.User)
+                .WithMany(x => x.Reminders)
                 .HasForeignKey(x => x.UserId);
 
             modelBuilder.Entity<Topic>().HasData(

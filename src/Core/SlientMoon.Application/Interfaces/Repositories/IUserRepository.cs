@@ -7,6 +7,7 @@ namespace SlientMoon.Application.Interfaces.Repositories
     {
         Task<ApplicationUser?> GetByEmailAsync(string email);
         Task<ApplicationUser> GetByRefreshTokenAsync(string refreshToken);
+        Task<ApplicationUser?> GetByIdWithTopicsAsync(int userId);
 
     }
 }

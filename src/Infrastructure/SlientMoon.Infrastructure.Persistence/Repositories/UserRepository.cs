@@ -26,5 +26,12 @@ namespace SlientMoon.Infrastructure.Persistence.Repositories
                     x.RefreshToken != null &&
                     x.RefreshToken.Token == refreshToken);
         }
+        public async Task<ApplicationUser?> GetByIdWithTopicsAsync(int userId)
+        {
+            return await _dbContext.ApplicationUsers
+                .Include(x => x.UserTopics)
+                .ThenInclude(x => x.Topic)
+                .FirstOrDefaultAsync(x => x.Id == userId);
+        }
     }
 }

@@ -1,13 +1,9 @@
-﻿using System;
-using System.Linq;
-using System.Reflection;
-using Dapper;
+﻿using Dapper;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
-using System.Text;
 using SlientMoon.Application.Interfaces.Caching;
 using SlientMoon.Application.Interfaces.Logging;
 using SlientMoon.Application.Interfaces.Repositories;
@@ -19,6 +15,11 @@ using SlientMoon.Infrastructure.Persistence.Logging;
 using SlientMoon.Infrastructure.Persistence.Repositories;
 using SlientMoon.Infrastructure.Persistence.Services;
 using SlientMoon.Infrastructure.Persistence.Settings;
+using SlientMoon.Infrastructure.Services;
+using System;
+using System.Linq;
+using System.Reflection;
+using System.Text;
 
 namespace SlientMoon.Infrastructure.Persistence
 {
@@ -48,10 +49,12 @@ namespace SlientMoon.Infrastructure.Persistence
             services.AddScoped<IPasswordHasher, PasswordHasher>();
             services.AddScoped<IDateTimeService, DateTimeService>();
             services.AddScoped<IAuthService, AuthService>();
+            services.AddScoped<IReminderService, ReminderService>();
             services.AddScoped<IJwtService, JwtService>();
             services.AddScoped<IDapper, DapperClass>();
             services.AddScoped<IUow, Uow>();
             RegisterDapperDomainMappings();
+            services.AddScoped<IReminderRepository, ReminderRepository>();
         }
         #region APIRepositories
         public static void AddPersistenceApiServices(this IServiceCollection services, IConfiguration configuration)

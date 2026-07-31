@@ -20,6 +20,7 @@ namespace SlientMoon.Domain.Entities
         public RefreshToken RefreshToken { get; set; }
         public ICollection<Topic> Topics { get; set; } = new List<Topic>();
         public ICollection<UserTopic> UserTopics { get; set; } = new List<UserTopic>();
+        public ICollection<Reminder> Reminders { get; set; } = new List<Reminder>();
     }
 
 }
