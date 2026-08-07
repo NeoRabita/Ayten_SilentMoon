@@ -1,19 +1,19 @@
-using System;
 using Asp.Versioning.ApiExplorer;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Tokens;
 using SlientMoon.Application;
 using SlientMoon.Infrastructure.Persistence;
 using SlientMoon.Infrastructure.Persistence.Settings;
 using SlientMoon.WebApi.Extensions;
+using SlientMoon.WebApi.Middleware;
+using System;
 using System.Configuration;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
 using System.Text;
-
 
 namespace SlientMoon.WebApi
 {
@@ -87,14 +87,14 @@ namespace SlientMoon.WebApi
             //app.UseHttpsRedirection();
 
             app.UseRouting();
-            app.UseErrorHandling();
 
+            app.UseErrorHandling();
 
             app.UseAuthentication();
 
-            app.UseAuthorization();
+           app.UseMiddleware<CurrentUserMiddleware>();
 
-           
+            app.UseAuthorization();
 
             app.UseSwaggerExtension(env, provider);
 

@@ -25,13 +25,4 @@ public class UserTopicRepository
             .ToListAsync();
     }
 
-
-    public async Task DeleteUserTopicsAsync(int userId)
-    {
-        var items = await _dbContext.UserTopics
-            .Where(x => x.UserId == userId)
-            .ToListAsync();
-
-        _dbContext.UserTopics.RemoveRange(items);
-    }
 }

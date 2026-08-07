@@ -2,7 +2,6 @@
 using Application.Abstractions.Messaging;
 using Microsoft.AspNetCore.Http;
 using SlientMoon.Application.DTOs.Topic;
-using SlientMoon.Application.Features.Queries.Topics.GetUserTopics;
 using SlientMoon.Application.Interfaces.Repositories;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +9,7 @@ using System.Security.Claims;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace SlientMoon.Application.Features.Queries.Topics.GetUserTopics;
+namespace SlientMoon.Application.Features.Onboarding.Queries.Topics.GetUserTopics;
 
 public sealed class GetUserTopicsQueryHandler
     : IQueryHandler<GetUserTopicsQuery, List<TopicResponse>>

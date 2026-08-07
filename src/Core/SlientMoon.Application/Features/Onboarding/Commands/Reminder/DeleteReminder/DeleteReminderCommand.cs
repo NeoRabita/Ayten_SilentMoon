@@ -1,6 +1,6 @@
 ﻿using Application.Abstractions.Messaging;
 
-namespace SlientMoon.Application.Features.Auth.Commands.Onboarding.DeleteReminder;
+namespace SlientMoon.Application.Features.Onboarding.Commands.Reminder.DeleteReminder;
 
 public sealed record DeleteReminderCommand(
     int Id

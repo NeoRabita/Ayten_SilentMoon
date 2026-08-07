@@ -1,14 +1,14 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using SlientMoon.Application.Features.Auth.Commands.Onboarding.UpdateTopics;
-using SlientMoon.Application.Features.Queries.Reminder.GetReminders;
-using SlientMoon.Application.Features.Queries.Topics.GetTopics;
-using SlientMoon.Application.Features.Queries.Topics.GetUserTopics;
+using SlientMoon.Application.Features.Onboarding.Queries.Reminder.GetReminders;
+using SlientMoon.Application.Features.Onboarding.Queries.Topics.GetTopics;
+using SlientMoon.Application.Features.Onboarding.Queries.Topics.GetUserTopics;
 using System.Threading.Tasks;
-using SlientMoon.Application.Features.Auth.Commands.Onboarding.CreateReminder;
-using SlientMoon.Application.Features.Auth.Commands.Onboarding.UpdateReminder;
-using SlientMoon.Application.Features.Auth.Commands.Onboarding.DeleteReminder;
+using SlientMoon.Application.Features.Onboarding.Commands.Reminder.CreateReminder;
+using SlientMoon.Application.Features.Onboarding.Commands.Reminder.UpdateReminder;
+using SlientMoon.Application.Features.Onboarding.Commands.Reminder.DeleteReminder;
 using SlientMoon.Application.DTOs.Reminder;
+using SlientMoon.Application.Features.Onboarding.Commands.UpdateTopics;
 
 namespace SlientMoon.WebApi.Controllers
 {

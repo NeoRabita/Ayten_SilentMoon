@@ -30,6 +30,7 @@ namespace SlientMoon.Infrastructure.Persistence
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<ITopicRepository, TopicRepository>();
+            services.AddScoped<IUserTopicRepository, UserTopicRepository>();
 
             services.AddDbContext<AppDbContext>(options =>
             options.UseOracle(configuration["APIAppSettings:ConnectionString"],

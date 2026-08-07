@@ -9,7 +9,7 @@ using System.Security.Claims;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace SlientMoon.Application.Features.Queries.Reminder.GetReminders;
+namespace SlientMoon.Application.Features.Onboarding.Queries.Reminder.GetReminders;
 
 public sealed class GetRemindersQueryHandler
     : IQueryHandler<GetRemindersQuery, List<ReminderResponse>>

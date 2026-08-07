@@ -6,7 +6,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace SlientMoon.Application.Features.Queries.Topics.GetTopics;
+namespace SlientMoon.Application.Features.Onboarding.Queries.Topics.GetTopics;
 
 public sealed class GetTopicsQueryHandler
     : ICommandHandler<GetTopicsQuery, List<TopicResponse>>

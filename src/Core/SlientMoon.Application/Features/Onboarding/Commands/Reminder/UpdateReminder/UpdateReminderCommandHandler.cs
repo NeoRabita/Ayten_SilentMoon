@@ -3,7 +3,7 @@ using Application.Abstractions.Messaging;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace SlientMoon.Application.Features.Auth.Commands.Onboarding.UpdateReminder;
+namespace SlientMoon.Application.Features.Onboarding.Commands.Reminder.UpdateReminder;
 
 public sealed class UpdateReminderCommandHandler
     : ICommandHandler<UpdateReminderCommand>

@@ -55,11 +55,6 @@ namespace SlientMoon.WebApi.Services
             };
         }
 
-        public async Task UpdateTopicsAsync(List<int> topicIds)
-        {
-            // UserTopic m?ntiqini sonra yazaca??q.
-            await Task.CompletedTask;
-        }
     }
 
 }

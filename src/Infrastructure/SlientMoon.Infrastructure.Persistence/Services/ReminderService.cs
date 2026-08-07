@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
-using SlientMoon.Application.Features.Auth.Commands.Onboarding.CreateReminder;
-using SlientMoon.Application.Features.Auth.Commands.Onboarding.DeleteReminder;
-using SlientMoon.Application.Features.Auth.Commands.Onboarding.UpdateReminder;
+using SlientMoon.Application.Features.Onboarding.Commands.Reminder.CreateReminder;
+using SlientMoon.Application.Features.Onboarding.Commands.Reminder.DeleteReminder;
+using SlientMoon.Application.Features.Onboarding.Commands.Reminder.UpdateReminder;
 using SlientMoon.Application.Interfaces.Repositories;
 using SlientMoon.Application.Interfaces.Services;
 using SlientMoon.Domain.Entities;
@@ -13,36 +13,25 @@ namespace SlientMoon.Infrastructure.Services;
 
 public class ReminderService : IReminderService
 {
-    private readonly IReminderRepository _reminderRepository;
-    private readonly IUow _uow;
-    private readonly IHttpContextAccessor _httpContextAccessor;
+    private readonly IUserService _userService;
 
-    public ReminderService(
-        IReminderRepository reminderRepository,
-        IUow uow,
-        IHttpContextAccessor httpContextAccessor)
+    public ReminderService(IUserService userService)
     {
-        _reminderRepository = reminderRepository;
-        _uow = uow;
-        _httpContextAccessor = httpContextAccessor;
+        _userService = userService;
     }
-    public async Task CreateReminderAsync(CreateReminderCommand command)
+    public async Task<Reminder> CreateReminderAsync(CreateReminderCommand command)
     {
-        var userId = int.Parse(
-        _httpContextAccessor.HttpContext!
-        .User.FindFirstValue(ClaimTypes.NameIdentifier)!);
+      var user = await _userService.GetCurrentUserAsync();
 
         var reminder = new Reminder
         {
-            UserId = userId,
+            UserId = user.Id,
             Time = command.Time,
             Days = command.Days,
             IsActive = true
         };
 
-        await _reminderRepository.AddAsync(reminder);
-
-        await _uow.SaveChangesAsync();
+        return reminder;
     }
     public async Task UpdateReminderAsync(UpdateReminderCommand command)
     {

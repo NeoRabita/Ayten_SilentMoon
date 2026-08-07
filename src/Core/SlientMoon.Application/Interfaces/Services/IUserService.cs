@@ -8,14 +8,9 @@ namespace SlientMoon.Application.Interfaces.Services
 {
     public interface IUserService
     {
-        ClaimsPrincipal GetUser();
-        string GetUserId();
-        string GetUserEmail();
-
         Task<ApplicationUser> GetCurrentUserAsync();
 
         Task<UserProfileResponse> GetProfileAsync();
 
-        Task UpdateTopicsAsync(List<int> topicIds);
     }
 }
