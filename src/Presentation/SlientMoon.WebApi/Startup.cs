@@ -88,7 +88,7 @@ namespace SlientMoon.WebApi
 
             app.UseRouting();
 
-            app.UseErrorHandling();
+            //app.UseErrorHandling();
 
             app.UseAuthentication();
 
