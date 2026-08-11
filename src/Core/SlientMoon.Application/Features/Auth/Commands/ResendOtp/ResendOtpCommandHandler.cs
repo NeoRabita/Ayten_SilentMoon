@@ -4,7 +4,7 @@ using SlientMoon.Application.Interfaces.Services;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace SlientMoon.Application.Features.Commands.ResendOtp;
+namespace SlientMoon.Application.Features.Auth.Commands.ResendOtp;
 
 public sealed class ResendOtpCommandHandler
     : ICommandHandler<ResendOtpCommand>

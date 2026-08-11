@@ -2,14 +2,14 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SlientMoon.Application.DTOs.Auth;
-using SlientMoon.Application.Features.Commands.ForgotPassword;
-using SlientMoon.Application.Features.Commands.GoogleLogin;
-using SlientMoon.Application.Features.Commands.Login;
-using SlientMoon.Application.Features.Commands.RefreshToken;
-using SlientMoon.Application.Features.Commands.Register;
-using SlientMoon.Application.Features.Commands.ResendOtp;
-using SlientMoon.Application.Features.Commands.ResetPassword;
-using SlientMoon.Application.Features.Commands.VerifyEmail;
+using SlientMoon.Application.Features.Auth.Commands.ForgotPassword;
+using SlientMoon.Application.Features.Auth.Commands.GoogleLogin;
+using SlientMoon.Application.Features.Auth.Commands.Login;
+using SlientMoon.Application.Features.Auth.Commands.RefreshToken;
+using SlientMoon.Application.Features.Auth.Commands.Register;
+using SlientMoon.Application.Features.Auth.Commands.ResendOtp;
+using SlientMoon.Application.Features.Auth.Commands.ResetPassword;
+using SlientMoon.Application.Features.Auth.Commands.VerifyEmail;
 using SlientMoon.Application.Interfaces.Services;
 using System.Threading.Tasks;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
@@ -30,7 +30,7 @@ namespace SlientMoon.WebApi.Controllers
         }
 
         [HttpPost("verify-email")]
-        public async Task<IResult> VerifyEmail([FromBody] VerifyEmailCommand  command)
+        public async Task<IResult> VerifyEmail([FromBody] VerifyEmailCommand command)
         {
             var result = await Dispatcher.Send(command);
             return HandleResult(result);

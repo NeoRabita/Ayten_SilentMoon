@@ -4,7 +4,7 @@ using SlientMoon.Application.Interfaces.Services;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace SlientMoon.Application.Features.Commands.GoogleLogin;
+namespace SlientMoon.Application.Features.Auth.Commands.GoogleLogin;
 
 public sealed class GoogleLoginCommandHandler
     : ICommandHandler<GoogleLoginCommand, LoginResponse>

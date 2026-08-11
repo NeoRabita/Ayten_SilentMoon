@@ -1,6 +1,6 @@
 ﻿using Application.Abstractions.Messaging;
 
-namespace SlientMoon.Application.Features.Commands.ResetPassword;
+namespace SlientMoon.Application.Features.Auth.Commands.ResetPassword;
 
 public sealed record ResetPasswordCommand(
     string Email,

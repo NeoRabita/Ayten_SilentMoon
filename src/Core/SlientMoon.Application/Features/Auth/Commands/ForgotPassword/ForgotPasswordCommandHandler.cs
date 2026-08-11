@@ -4,7 +4,7 @@ using SlientMoon.Application.Interfaces.Services;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace SlientMoon.Application.Features.Commands.ForgotPassword;
+namespace SlientMoon.Application.Features.Auth.Commands.ForgotPassword;
 
 public sealed class ForgotPasswordCommandHandler
     : ICommandHandler<ForgotPasswordCommand>

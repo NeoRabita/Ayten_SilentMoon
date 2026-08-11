@@ -76,8 +76,8 @@ namespace SlientMoon.WebApi.Extensions
                         }, new List<string>()
                     },
                 });
-                c.OperationFilter<CustomMessagingResponseFilter>();
-                c.OperationFilter<AcceptLanguageHeaderFilter>();
+                //c.OperationFilter<CustomMessagingResponseFilter>();
+                //c.OperationFilter<AcceptLanguageHeaderFilter>();
                 c.UseInlineDefinitionsForEnums();
             });
         }

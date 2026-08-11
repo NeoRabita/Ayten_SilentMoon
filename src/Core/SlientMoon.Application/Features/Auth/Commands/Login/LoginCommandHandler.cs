@@ -1,5 +1,6 @@
 ﻿using Application.Abstractions.Messaging;
 using SlientMoon.Application.DTOs.Auth;
+using SlientMoon.Application.Features.Auth.Commands.Login;
 using SlientMoon.Application.Interfaces.Repositories;
 using SlientMoon.Application.Interfaces.Services;
 using SlientMoon.Domain.Entities;
@@ -7,7 +8,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace SlientMoon.Application.Features.Commands.Login;
+namespace SlientMoon.Application.Features.Auth.Commands.Login;
 
 public sealed class LoginCommandHandler
     : ICommandHandler<LoginCommand, LoginResponse>

@@ -6,7 +6,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace SlientMoon.Application.Features.Commands.RefreshToken;
+namespace SlientMoon.Application.Features.Auth.Commands.RefreshToken;
 
 public sealed class RefreshTokenCommandHandler
     : ICommandHandler<RefreshTokenCommand, LoginResponse>

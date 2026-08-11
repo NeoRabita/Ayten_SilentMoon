@@ -7,7 +7,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace SlientMoon.Application.Features.Commands.Register;
+namespace SlientMoon.Application.Features.Auth.Commands.Register;
 
 public sealed class RegisterCommandHandler
     : ICommandHandler<RegisterCommand, RegisterResponse>

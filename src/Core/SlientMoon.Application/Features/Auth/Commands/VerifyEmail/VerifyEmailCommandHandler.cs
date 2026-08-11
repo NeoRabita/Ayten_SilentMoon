@@ -1,14 +1,14 @@
 ﻿using Application.Abstractions.Messaging;
+using SlientMoon.Application.DTOs.Auth;
 using SlientMoon.Application.Interfaces.Repositories;
-using SlientMoon.Domain.Entities;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace SlientMoon.Application.Features.Commands.VerifyEmail;
+namespace SlientMoon.Application.Features.Auth.Commands.VerifyEmail;
 
 public sealed class VerifyEmailCommandHandler
-    : ICommandHandler<VerifyEmailCommand>
+    : ICommandHandler<VerifyEmailCommand, VerifyEmailResponse>
 {
     private readonly IUserRepository _userRepository;
 
@@ -17,7 +17,7 @@ public sealed class VerifyEmailCommandHandler
         _userRepository = userRepository;
     }
 
-    public async Task<Result> Handle(
+    public async Task<Result<VerifyEmailResponse>> Handle(
         VerifyEmailCommand command,
         CancellationToken ct)
     {
@@ -25,7 +25,7 @@ public sealed class VerifyEmailCommandHandler
 
         if (user == null)
         {
-            return Result.Failure(
+            return Result.Failure<VerifyEmailResponse>(
                 Error.NotFound(
                     "Auth.UserNotFound",
                     "İstifadəçi tapılmadı."));
@@ -33,15 +33,16 @@ public sealed class VerifyEmailCommandHandler
 
         if (user.OtpCode != command.Otp)
         {
-            return Result.Failure(
+            return Result.Failure<VerifyEmailResponse>(
                 Error.Validation(
                     "Auth.InvalidOtp",
                     "OTP kodu yanlışdır."));
         }
 
-        if (user.OtpExpireDate == null || user.OtpExpireDate < DateTime.UtcNow)
+        if (user.OtpExpireDate == null ||
+            user.OtpExpireDate < DateTime.UtcNow)
         {
-            return Result.Failure(
+            return Result.Failure<VerifyEmailResponse>(
                 Error.Validation(
                     "Auth.OtpExpired",
                     "OTP kodunun vaxtı bitib."));
@@ -52,6 +53,10 @@ public sealed class VerifyEmailCommandHandler
         user.OtpExpireDate = null;
         user.OtpAttemptCount = 0;
 
-        return Result.Success();
+        return Result.Success(new VerifyEmailResponse
+        {
+            IsVerified = true,
+            Message = "Email uğurla təsdiqləndi."
+        });
     }
 }

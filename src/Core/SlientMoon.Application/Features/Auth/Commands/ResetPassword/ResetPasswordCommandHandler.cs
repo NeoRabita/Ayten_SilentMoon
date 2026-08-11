@@ -5,7 +5,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace SlientMoon.Application.Features.Commands.ResetPassword;
+namespace SlientMoon.Application.Features.Auth.Commands.ResetPassword;
 
 public sealed class ResetPasswordCommandHandler
     : ICommandHandler<ResetPasswordCommand>
