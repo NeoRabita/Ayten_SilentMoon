@@ -3,6 +3,8 @@ using Microsoft.Extensions.Configuration;
 using SlientMoon.Application.Exceptions;
 using SlientMoon.Application.DTOs.Auth;
 using SlientMoon.Application.DTOs.Email;
+using SlientMoon.Application.Interfaces.Messaging;
+using SlientMoon.Application.Messages;
 using SlientMoon.Application.Interfaces.Repositories;
 using SlientMoon.Application.Interfaces.Services;
 using SlientMoon.Domain.Entities;
@@ -20,7 +22,8 @@ namespace SlientMoon.Infrastructure.Persistence.Services
         private readonly IJwtService _jwtService;
         private readonly IOtpSender _otpSender;
         private readonly IConfiguration _configuration;
-        public AuthService(IUserRepository userRepository, IUow uow, IEmailService emailService, IPasswordHasher passwordHasher, IJwtService jwtService, IOtpSender otpSender, IConfiguration configuration)
+        private readonly IMessagePublisher _messagePublisher;
+        public AuthService(IUserRepository userRepository, IUow uow, IEmailService emailService, IPasswordHasher passwordHasher, IJwtService jwtService, IOtpSender otpSender, IConfiguration configuration, IMessagePublisher messagePublisher)
         {
             _userRepository = userRepository;
             _uow = uow;
@@ -29,6 +32,7 @@ namespace SlientMoon.Infrastructure.Persistence.Services
             _jwtService = jwtService;
             _otpSender = otpSender;
             _configuration = configuration;
+            _messagePublisher = messagePublisher;
         }
 
         public async Task<RegisterResponse> RegisterAsync(RegisterRequest request)
@@ -53,6 +57,11 @@ namespace SlientMoon.Infrastructure.Persistence.Services
 
             await _userRepository.AddAsync(user);
 
+            await _messagePublisher.PublishAsync(
+                new UserRegisteredMessage(
+                    user.Id,
+                    user.Email
+                ));
 
             return new RegisterResponse
             {

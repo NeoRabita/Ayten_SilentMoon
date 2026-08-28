@@ -4,6 +4,7 @@ using Microsoft.Extensions.Hosting;
 using NLog;
 using NLog.Web;
 using System;
+using SlientMoon.Application.Interfaces.Messaging;
 
 namespace SlientMoon.WebApi
 {

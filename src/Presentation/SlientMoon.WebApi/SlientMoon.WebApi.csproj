@@ -21,6 +21,7 @@
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.0" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\SlientMoon.Infrastructure.RabbitMqMessaging\SlientMoon.Infrastructure.RabbitMqMessaging.csproj" />
     <ProjectReference Include="..\..\Core\SlientMoon.Application\SlientMoon.Application.csproj" />
     <ProjectReference Include="..\..\Infrastructure\SlientMoon.Infrastructure.Persistence\SlientMoon.Infrastructure.Persistence.csproj" />
     <ProjectReference Include="..\..\Shared\SlientMoon.SharedKernel\SlientMoon.SharedKernel.csproj" />

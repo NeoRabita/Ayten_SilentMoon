@@ -7,13 +7,20 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using SlientMoon.Application;
+using SlientMoon.Application.Interfaces.Messaging;
 using SlientMoon.Infrastructure.Persistence;
+using SlientMoon.Infrastructure.Persistence.Services;
 using SlientMoon.Infrastructure.Persistence.Settings;
+using SlientMoon.Infrastructure.RabbitMqMessaging;
+using SlientMoon.Infrastructure.RabbitMqMessaging.Consumers;
+using SlientMoon.Infrastructure.RabbitMqMessaging.Settings;
 using SlientMoon.WebApi.Extensions;
 using SlientMoon.WebApi.Middleware;
 using System;
-using System.Configuration;
 using System.Text;
+using Microsoft.Extensions.Options;
+using Minio;
+using SlientMoon.Application.Interfaces.Services;
 
 namespace SlientMoon.WebApi
 {
@@ -36,6 +43,32 @@ namespace SlientMoon.WebApi
             services.AddApplicationServices();
             services.AddPersistenceRegistration(Configuration);
             services.AddPersistenceApiServices(Configuration);
+            services.Configure<MinioSettings>(
+                Configuration.GetSection("MinioSettings"));
+
+            services.AddSingleton<IMinioClient>(sp =>
+            {
+                var settings = sp
+                    .GetRequiredService<IOptions<MinioSettings>>()
+                    .Value;
+
+                return new MinioClient()
+                    .WithEndpoint(settings.Endpoint)
+                    .WithCredentials(
+                        settings.AccessKey,
+                        settings.SecretKey)
+                    .WithSSL(settings.UseSSL)
+                    .Build();
+            });
+
+            services.AddScoped<IFileStorageService, MinioStorageService>();
+
+
+            services.AddScoped<IMessagePublisher, RabbitMqPublisher>();
+            services.Configure<RabbitMqSettings>(
+                Configuration.GetSection("RabbitMqSettings"));
+
+            services.AddHostedService<RabbitMqConsumer>();
 
             services.AddSwaggerExtension();
             services.AddLocalization();
