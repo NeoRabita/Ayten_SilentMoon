@@ -6,6 +6,7 @@ using System;
 public interface IUow : IDisposable
 {
     IUserRepository UserRepository { get; }
+    IGenericRepository<T> GetRepository<T>() where T : class;
     Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
     Task BeginTransactionAsync();
     Task CommitAsync();

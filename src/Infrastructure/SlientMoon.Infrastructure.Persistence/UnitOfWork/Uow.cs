@@ -1,22 +1,26 @@
 using Microsoft.EntityFrameworkCore.Storage;
 using SlientMoon.Application.Interfaces.Repositories;
 using SlientMoon.Infrastructure.Persistence.Contexts;
+using SlientMoon.Infrastructure.Persistence.Repositories;
 using System;
-using System.Threading.Tasks;
+using System.Collections.Generic;
 using System.Threading;
-
+using System.Threading.Tasks;
 public class Uow : IUow
 {
     private readonly AppDbContext _context;
     private IDbContextTransaction? _transaction;
     public IUserRepository UserRepository { get; }
 
-    public Uow(
-     AppDbContext context,
-     IUserRepository userRepository)
+    public Uow(AppDbContext context, IUserRepository userRepository)
     {
         _context = context;
         UserRepository = userRepository;
+    }
+
+    public IGenericRepository<T> GetRepository<T>() where T : class
+    {
+        return new GenericRepository<T>(_context);
     }
 
     public async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)

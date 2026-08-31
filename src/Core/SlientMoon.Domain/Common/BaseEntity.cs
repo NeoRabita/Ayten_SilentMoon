@@ -8,5 +8,6 @@ namespace SlientMoon.Domain.Common
     public abstract class BaseEntity
     {
         public virtual int Id { get; set; }
+        //Createdate, IsDeleted, UpdateDate elave et
     }
 }

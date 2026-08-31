@@ -25,6 +25,7 @@
 	</ItemGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\..\Core\SlientMoon.Application\SlientMoon.Application.csproj" />
+		<ProjectReference Include="..\..\Core\SlientMoon.Domain\SlientMoon.Domain.csproj" />
 		<ProjectReference Include="..\..\Shared\SlientMoon.SharedKernel\SlientMoon.SharedKernel.csproj" />
 	</ItemGroup>
 </Project>
