@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
+using SlientMoon.Application.Interfaces.Authentication;
 using SlientMoon.Application.Interfaces.Caching;
 using SlientMoon.Application.Interfaces.Logging;
 using SlientMoon.Application.Interfaces.Repositories;
@@ -54,6 +55,7 @@ namespace SlientMoon.Infrastructure.Persistence
             services.AddScoped<IJwtService, JwtService>();
             services.AddScoped<IDapper, DapperClass>();
             services.AddScoped<IUow, Uow>();
+            services.AddScoped<ICurrentUser, CurrentUser>();
             RegisterDapperDomainMappings();
             services.AddScoped<IReminderRepository, ReminderRepository>();
         }
